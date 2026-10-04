@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+# UCI veri seti (~130 MB) not defteri tarafından otomatik indirilir
+household_power_consumption.txt
+*.zip
