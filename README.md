@@ -5,7 +5,7 @@ Her not defteri Google Colab'da doğrudan açılıp **Çalışma Zamanı → Tü
 
 | # | Proje | Yöntem | Öne çıkan sonuç | Not defteri |
 |---|---|---|---|---|
-| 1 | [İkinci El Araç Fiyat Tahmini](1_Python_Arac_Fiyat) | Pandas, EDA, Doğrusal Regresyon, Karar Ağacı | Test R² = 0,785 · MAE = 1,38 lakh ₹ | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mirhanserim/yapay-zeka-portfolyo/blob/main/1_Python_Arac_Fiyat/Arac_Fiyat_Tahmini.ipynb) |
+| 1 | [İkinci El Araç Fiyat Tahmini](1_Python_Arac_Fiyat) | Pandas, EDA, 4 model karşılaştırması, Gradient Boosting, değer kaybı oranı hedefi | Test R² = 0,968 · MAE = 0,61 lakh ₹ · CV R² = 0,976 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mirhanserim/yapay-zeka-portfolyo/blob/main/1_Python_Arac_Fiyat/Arac_Fiyat_Tahmini.ipynb) |
 | 4 | [Hanehalkı Elektrik Tüketimi Tahmini](4_MLDL_Enerji) | Zaman serisi, LSTM, GRU (PyTorch), temel model karşılaştırması | GRU: Test MAE = 0,324 kW · R² = 0,550 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mirhanserim/yapay-zeka-portfolyo/blob/main/4_MLDL_Enerji/Enerji_Tuketimi_Tahmini.ipynb) |
 
 Web geliştirme projesi ayrı bir depoda: [basvuru-takip](https://github.com/mirhanserim/basvuru-takip)
@@ -14,6 +14,12 @@ Web geliştirme projesi ayrı bir depoda: [basvuru-takip](https://github.com/mir
 Aracın sıfır fiyatı, yaşı, kilometresi, yakıt tipi, vites ve satıcı türünden ikinci el satış fiyatını tahmin eden uçtan uca proje:
 problem tanımı → veri temizleme → keşifçi analiz → model → değerlendirme → `tahmin_et()` mini uygulaması.
 Veri: *Vehicle Dataset from CarDekho* (Kaggle), 301 ilan.
+
+Doğrusal regresyon, karar ağacı, Random Forest ve Gradient Boosting 5 katlı çapraz doğrulamayla karşılaştırıldı. Ağaç modelleri eğitim
+aralığının dışına tahmin yapamadığı için pahalı araçlarda zorlandı; hedef fiyat yerine **değer kaybı oranı** (satış / sıfır fiyatı)
+olarak yeniden tanımlanınca Gradient Boosting test R²'yi **0,785 → 0,968**, ortalama hatayı **1,38 → 0,61 lakh ₹** seviyesine taşıdı.
+
+![Model karşılaştırması](1_Python_Arac_Fiyat/grafik_modeller.png)
 
 ![EDA](1_Python_Arac_Fiyat/grafik_eda.png)
 
