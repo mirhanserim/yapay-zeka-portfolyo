@@ -6,7 +6,7 @@ Her not defteri Google Colab'da doğrudan açılıp **Çalışma Zamanı → Tü
 | # | Proje | Yöntem | Öne çıkan sonuç | Not defteri |
 |---|---|---|---|---|
 | 1 | [İkinci El Araç Fiyat Tahmini](1_Python_Arac_Fiyat) | Pandas, EDA, 4 model karşılaştırması, Gradient Boosting, değer kaybı oranı hedefi | Test R² = 0,968 · MAE = 0,61 lakh ₹ · CV R² = 0,976 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mirhanserim/yapay-zeka-portfolyo/blob/main/1_Python_Arac_Fiyat/Arac_Fiyat_Tahmini.ipynb) |
-| 4 | [Hanehalkı Elektrik Tüketimi Tahmini](4_MLDL_Enerji) | Zaman serisi, LSTM, GRU (PyTorch), temel model karşılaştırması | GRU: Test MAE = 0,324 kW · R² = 0,550 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mirhanserim/yapay-zeka-portfolyo/blob/main/4_MLDL_Enerji/Enerji_Tuketimi_Tahmini.ipynb) |
+| 4 | [Hanehalkı Elektrik Tüketimi Tahmini](4_MLDL_Enerji) | Zaman serisi, LSTM, GRU (PyTorch), temel model karşılaştırması, haftalık bağlam + Gradient Boosting | GRU: Test MAE = 0,324 kW · R² = 0,550 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mirhanserim/yapay-zeka-portfolyo/blob/main/4_MLDL_Enerji/Enerji_Tuketimi_Tahmini.ipynb) |
 
 Web geliştirme projesi ayrı bir depoda: [basvuru-takip](https://github.com/mirhanserim/basvuru-takip)
 
@@ -28,12 +28,16 @@ olarak yeniden tanımlanınca Gradient Boosting test R²'yi **0,785 → 0,968**,
 Naif, mevsimsel naif ve doğrusal regresyon temel modelleri ile LSTM ve GRU karşılaştırıldı; kronolojik bölme ve erken durdurma kullanıldı.
 Veri: UCI *Individual Household Electric Power Consumption* (CC BY 4.0), not defteri tarafından otomatik indirilir.
 
-| Model | MAE (kW) | RMSE (kW) | R² |
-|---|---|---|---|
-| Naif (önceki saat) | 0,366 | 0,566 | 0,342 |
-| Doğrusal Regresyon | 0,348 | 0,488 | 0,511 |
-| LSTM | 0,344 | 0,478 | 0,530 |
-| **GRU** | **0,324** | **0,467** | **0,550** |
+| Model | Doğrulama R² | Test MAE (kW) | Test RMSE (kW) | Test R² |
+|---|---|---|---|---|
+| Naif (önceki saat) | 0,399 | 0,366 | 0,566 | 0,342 |
+| Doğrusal Regresyon | 0,554 | 0,348 | 0,488 | 0,511 |
+| LSTM | 0,605 | 0,344 | 0,478 | 0,530 |
+| **GRU** | **0,611** | **0,324** | **0,467** | **0,550** |
+| *Geliştirme: haftalık bağlam + Gradient Boosting* | *0,622* | *0,312* | – | *0,585* |
+
+Model sıralaması doğrulama ve test dönemlerinde aynı. Geliştirme denemesinde 48–336 saat önceki değerler ve haftalık ortalama
+özellik olarak eklenince hata daha da düştü: kazanç daha karmaşık bir ağdan değil, doğru zaman bağlamından geliyor.
 
 ![Tahmin](4_MLDL_Enerji/g3_tahmin_hafta.png)
 
