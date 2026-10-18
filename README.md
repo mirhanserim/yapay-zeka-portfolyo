@@ -48,4 +48,4 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-Muhammed Mirhan Serim · [mmserim.com.tr](https://mmserim.com.tr)
+Muhammed Mirhan Serim · [quantrophic.com.tr](https://quantrophic.com.tr)
